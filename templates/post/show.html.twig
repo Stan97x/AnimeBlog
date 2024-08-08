@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<style>
+    h3 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .items-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .item_actu1, .item_actu2 {
+        width: calc(50% - 20px); 
+        padding: 10px;
+        box-sizing: border-box; 
+        margin-bottom: 20px;
+        position: relative; 
+        overflow: hidden; 
+    }
+
+    .item_actu1 img, .item_actu2 img {
+        width: 100%;
+        display: block; 
+        border-radius: 25px; 
+        transition: transform 0.3s ease; 
+        border-radius:20px;
+    }
+
+    .item_actu1:hover img, .item_actu2:hover img {
+        transform: scale(1.1);
+        border-radius: 25px;
+    }
+
+    .item_actu1 h3, .item_actu2 h3 {
+        text-align: center;
+        font-size: 150%;
+        text-decoration: underline;
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .item_actu1, .item_actu2 {
+            width: 100%; 
+        }
+    h3
+    {
+        color:white;
+    }
+    p
+    {
+        color:white;
+    }
+    }
+</style>
+
+<h3>{{ post.title }}</h3>
+
+<div class="items-content">
+    {% for psp in rel %}
+        {% set item_actu = loop.index is odd ? 'item_actu1' : 'item_actu2' %}
+        <div class="{{ item_actu }}">
+            <img src="{{ asset('Asset/img/Perso/' ~ psp.image) }}" alt="Image for {{ psp.name }}">
+            <h3>{{ psp.name }}</h3>
+            <p>{{ psp.content }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+    

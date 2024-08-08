@@ -1,0 +1,42 @@
+{# templates/list/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Post List{% endblock %}
+
+{% block body %}
+<br>
+<h1>Post List</h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Image</th>
+      <th scope="col">Slug</th>
+      <th scope="col">Summary</th>
+      <th scope="col">Content</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in allPost %}
+    <tr>
+      <th scope="row">{{ post.id }}</th>
+      <td>{{ post.title }}</td>
+      <td>{{ post.image }}</td>
+      <td>{{ post.slug }}</td>
+      <td>{{ post.summary }}</td>
+      <td>{{ post.content }}</td>
+      <td>
+        <a href="{{ path('list_edit', {'id': post.id}) }}" class="btn btn-warning">Edit</a> 
+        {{ form_start(delete_forms[post.id], {'attr': {'style': 'display:inline'}}) }}
+        {{ form_widget(delete_forms[post.id].submit, {'label': 'Delete'}) }}
+        {{ form_end(delete_forms[post.id]) }}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<a href="{{ path('list_new') }}" class="btn btn-primary">Nouveau post</a>
+{% endblock %}

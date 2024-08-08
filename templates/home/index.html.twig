@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AnimeBlog{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+<style>
+.container_entete
+{
+    top:40%;
+    background-color: green;
+    width: 100%; 
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2em 1em;
+    margin-top: 2em;
+}
+.item_header{
+    width: 45%;
+    max-width: 45em;
+    min-width: 18em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    
+}
+.txt_header{
+    max-width: 150em;
+    font-size: 1.2em;
+    color:white;
+    margin-top: 3em;
+}
+.colored_txt_header,.colored_txt{
+    font-size: 1em;
+    font-weight: bold;
+}
+.colored_txt_header{    
+    color: white;
+}
+.colored_txt{
+    color: white;
+}
+.image_entete{
+    width: 38px;
+    max-width: 15em;
+    min-width: 10em;
+    align-self: center;
+    border-radius:50%;
+}
+    .items-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 2em 0;
+    }
+
+    .items-content img {
+        width: 100%;
+    }
+
+    .item_actu1, .item_actu2 {
+        width: 30%;
+        min-width: 18em;
+        text-align: center;
+        border-radius: 2em;
+        padding: 1em 0.5em;
+        margin: 0.5em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .item_actu1 {
+        background-color: green;
+        border: 1px solid black;
+        color: white;
+    }
+
+    .item_actu1 img, .item_actu2 img {
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    .item_actu1 button {
+        color: white;
+        border-color: white;
+    }
+
+    .item_actu2 {
+        background-color: white;
+        border: 1px solid black;
+    }
+
+    .item_actu1:hover, .item_actu2:hover {
+        transform: scale(1.05);
+    }
+
+     @media (max-width: 768px) {
+        .item_actu1, .item_actu2 {
+            width: 45%;
+        }
+    }
+</style>
+
+<div class="container_entete">
+    <div class="item_header">
+        
+        <p class="txt_header">AnimeBlog, est un Blog montrant les meilleurs personnages de chaque manga et leur biographie.</p>
+    </div>
+    <img class="image_entete" src="{{ asset('./Asset/img/Header.png') }}" alt="AnimeBlog">
+</div>
+</header>
+
+<div class="items-content">
+    {% for pst in allPost %}
+        {% set item_actu = loop.index0 is odd ? 'item_actu1' : 'item_actu2' %}
+        <div class="{{ item_actu }}">
+            <h3>{{ pst.title }}</h3>
+            <img src="{{ asset('Asset/img/' ~ pst.image) }}" alt="Image">
+            <p>{{ pst.summary }}</p>
+            <br>
+            <button class="btn btn-outline-success" onclick="window.location.href='{{ path('post_show', {'id': pst.id}) }}'">Découvrir plus</button>
+            
+
+        </div>
+    {% endfor %}
+</div>
+
+<a href="{{ path('posts_download') }}" class="btn custom-button">Download Posts as JSON</a>
+
+<style>
+.custom-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    justify-content:center;
+    display:flex;
+    width:15%;
+    
+}
+
+.custom-button:hover {
+    background-color: green;
+}
+</style>
+
+
+{% endblock %}

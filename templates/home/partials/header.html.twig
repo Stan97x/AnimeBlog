@@ -1,0 +1,276 @@
+<style>
+body {
+    background: black;
+}
+
+.nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: #000000;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    height: 70px;
+    text-align: center;
+}
+.nav-menu a.btn:hover,
+a.logo:hover,
+ {
+    color: unset;
+}
+
+.header {
+    width: 70px;
+    border-radius: 2em;
+}
+
+.nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0; /* Adjusted to show the menu in the normal view */
+    background-color: #000000;
+    flex-direction: column;
+    width: 30%;
+    height: 100vh;
+    padding: 20px;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    z-index: 100; /* Ensure it appears above other elements */
+}
+
+.nav-menu li {
+    margin-bottom: 20px;
+}
+
+.nav-menu a {
+    color: white;
+    font-size: 14px; /* Adjust size as needed */
+    text-transform: uppercase;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.nav-menu a:hover {
+    color: green;
+}
+
+.image-display {
+    position: absolute;
+    top: 100%;
+    left: 30%; /* Position it next to the nav-menu */
+    width: 30%; /* Adjust as needed */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Optional: semi-transparent background */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Ensure it appears above other elements */
+}
+
+.image-display img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.hamburger-menu {
+    --size: 30px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 101;
+    position: relative;
+    display: none;
+    align-items: center;
+}
+
+.hamburger {
+    position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    width: 30px;
+    height: 3px;
+    border-radius: 0.5rem;
+    background-color: white;
+    transition: 0.4s;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.hamburger::before {
+    top: -10px;
+}
+
+.hamburger::after {
+    bottom: -10px;
+}
+
+.nav-menu li
+{
+    text-decoration:none;
+    list-style-type: none;
+}
+
+.hamburger-menu.active .hamburger {
+    background-color: transparent;
+}
+
+.hamburger-menu.active .hamburger::before {
+    transform-origin: top left;
+    transform: rotate(45deg);
+    left: 6px;
+}
+
+.hamburger-menu.active .hamburger::after {
+    transform-origin: bottom left;
+    transform: rotate(-45deg);
+    left: 6px;
+}
+
+@media only screen and (max-width: 1800px) {
+    .hamburger-menu {
+        display: grid;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        background-color: #000000;
+        flex-direction: column;
+        width: 30%;
+        height: 100vh;
+        padding: 20px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+    .nav-menu .btn {
+    color: #ffffff;
+    padding: 0.25rem 1.5rem;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    border: 1px solid green;
+    border-radius: 30px;
+}
+
+.nav-menu .btn:hover
+{
+    background-color: green;
+    color:white;
+}
+.nav-menu .btn i,
+.nav-menu .btn span {
+    z-index: 1;
+}
+
+.nav-menu .btn i {
+    margin-right: 1rem;
+}
+.nav-menu .btn {
+    color: #ffffff;
+    padding: 0.25rem 1.5rem;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    border: 1px solid green;
+    border-radius: 30px;
+}
+.nav-menu .btn1 {
+    color: #ffffff;
+    padding: 0.25rem 1.5rem;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    font-weight: 700;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 30px;
+}
+.nav-menu .btn1:hover
+{
+    background-color: grey;
+    color:white;
+}
+.nav-menu .btn i,
+.nav-menu .btn span {
+    z-index: 1;
+}
+
+.nav-menu .btn i {
+    margin-right: 1rem;
+}
+}
+</style>
+<section class="nav-wrapper">
+        <div class="container">
+            <div class="nav">
+                <a href="{{ path('index') }}" class="logo">
+                  <img class="header" src="{{ asset('./Asset/img/Header.png') }}" alt="Image">
+                  
+                </a>
+                <ul class="nav-menu" id="nav-menu">
+                     <li data-image="{{ asset('./Asset/img/header/broly.webp') }}"><a href="{{path('index')}}">Accueil</a></li>
+                <li data-image="{{ asset('./Asset/img/header/killua.webp') }}"><a href="{{path('list_index')}}">Liste</a></li>
+                <li data-image="{{ asset('./Asset/img/header/dabi.webp') }}"><a href="{{path('register')}}" class="btn1 btn-hover"><span>Inscription</span></a>
+                <li data-image="{{ asset('./Asset/img/header/goku.webp') }}"><a href="{{path('login')}}" class="btn btn-hover"><span>Connexion</span></a>
+                </ul>
+
+                <div id="image-display" class="image-display">
+                <img src="" alt="Display Image">
+            </div>
+                <!--Mobile version-->
+                <div class="hamburger-menu" id="hamburger-menu">
+                    <div class="hamburger">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(()=>
+{
+    $('#hamburger-menu').click(()=>
+    {
+        $('#hamburger-menu').toggleClass('active')
+        $('.nav-menu').toggleClass('active')
+    })
+
+     $('.nav-menu li').hover(function() {
+            var imageUrl = $(this).data('image');
+            $('#image-display img').attr('src', imageUrl);
+            $('#image-display').fadeIn();
+        }, function() {
+            $('#image-display').fadeOut();
+        });
+    });
+
+    </script>

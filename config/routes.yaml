@@ -1,3 +1,53 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+post_show:
+    path: /post/{id}
+    controller: App\Controller\PostController::show
+    requirements:
+        id: \d+
+
+list_index:
+    path: /list/
+    controller: App\Controller\ListController::index
+    methods: GET
+
+list_new:
+    path: /list/new
+    controller: App\Controller\ListController::new
+    methods: [GET, POST]
+
+list_edit:
+    path: /list/{id}/edit
+    controller: App\Controller\ListController::edit
+    methods: [GET, POST]
+    requirements:
+        id: \d+
+
+post_delete:
+    path: /list/{id}
+    controller: App\Controller\ListController::delete
+    methods: POST
+    requirements:
+        id: \d+
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    methods: POST
+
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+
+posts_download:
+    path: /posts/download
+    controller: App\Controller\PostController::exportToJson
+    methods: GET
+
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::contact
+ 
